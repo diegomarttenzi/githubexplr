@@ -45,11 +45,12 @@ const Dashboard: React.FC = () => {
       const user = response.data;
       const login = user.login;
       console.log(user);
-      const userIndex = listusers.findIndex(user => user.login === login);
-      if (!userIndex) {
-        setInputError('Usuário já cadastrado.');
-        return;
-      }
+      const userAlreadyExists = listusers.some(user => user.login === login);
+
+if (userAlreadyExists) {
+  setInputError('Usuário já cadastrado.');
+  return;
+}
       setUsers([...listusers, user]);
       setNewUser('');
       setInputError('');
