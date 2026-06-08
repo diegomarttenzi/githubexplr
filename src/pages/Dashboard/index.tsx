@@ -32,6 +32,14 @@ const Dashboard: React.FC = () => {
 
   async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
+    const repositoryAlreadyExists = repositories.some(
+  repository => repository.full_name === newRepo
+);
+
+if (repositoryAlreadyExists) {
+  setInputError('Repositório já cadastrado.');
+  return;
+}
     if (!newRepo) {
       setInputError('Digite o autor/nome do repositório');
       return;
